@@ -36,6 +36,46 @@ This app integrates the following open source repositories:
 2. Add the models to the appropriate resource folders in Xcode.
 3. Build and run the app on your iOS device (preferably with at least 6GB RAM for best performance).
 
+## Repository Structure
+
+### Key Swift Files in `SheerpaOnnx/Models`
+
+- **CinderellaStory.swift**  
+  Implements the `Story` protocol for the classic Cinderella fairytale. Contains the full story text and methods for generating questions and feedback related to the story, supporting interactive storytelling.
+
+- **StoryView.swift**  
+  SwiftUI view for displaying and interacting with stories, likely providing the user interface for story presentation and user input.
+
+- **Phi3ViewModel.swift**  
+  Manages the Phi-3 language model, including model loading, downloading, and inference. Handles AI-driven story generation and manages model events and download progress.
+
+- **SherpaOnnx.swift**  
+  Provides wrappers and configuration utilities for the Sherpa ONNX-based text-to-speech (TTS) engine. Manages TTS model setup and audio generation.
+
+- **WhisperState.swift**  
+  Manages the state and logic for speech-to-text transcription using the Whisper model. Handles audio recording, model loading, and transcription state.
+
+- **ElevenLabsManager.swift**  
+  Handles text-to-speech synthesis using the ElevenLabs API and the SherpaOnnx TTS wrapper. Manages audio playback and caching of generated speech.
+
+- **Extension.swift**  
+  Contains utility extensions for audio buffer manipulation, making it easier to convert audio buffers to arrays for processing.
+
+- **OpenAIManager.swift**  
+  Provides an interface for interacting with OpenAI models (via `Phi3ViewModel`). Handles sending prompts and receiving AI-generated responses for chat or story continuation.
+
+- **SherpaOnnxViewModel.swift**  
+  ViewModel for managing SherpaOnnx-related state, likely bridging between the UI and the ONNX-based models for transcription and TTS.
+
+- **Model.swift**  
+  Contains utility functions for loading and configuring various speech and language models, including resource management and model selection.
+
+- **strathweb_phi_engine.swift**  
+  Large file providing Swift bindings and utilities for the Strathweb Phi-3 engine, including inference options, result handling, and engine configuration.
+
+- **SherpaOnnx-Bridging-Header.h**  
+  Objective-C bridging header to expose C/C++ APIs (such as Sherpa ONNX) to Swift code.
+
 ## Credits
 
 This app would not be possible without the amazing work of the open source community:
