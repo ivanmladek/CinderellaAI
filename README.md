@@ -1,3 +1,5 @@
+![App Icon](https://raw.githubusercontent.com/ivanmladek/CinderellaAI/main/Assets.xcassets/AppIcon.appiconset/8-cMUROwLTm8kBW4E.png)
+
 # SherpaOnnx: AI Voice-to-Text and Storytelling App
 
 SherpaOnnx is a SwiftUI app that combines advanced voice-to-text transcription and AI-powered storytelling. It leverages state-of-the-art open source projects for speech recognition, text-to-speech, and large language model inference, all running locally on your device.
