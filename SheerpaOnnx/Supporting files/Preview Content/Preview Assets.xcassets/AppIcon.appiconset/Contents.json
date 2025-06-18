@@ -1,0 +1,14 @@
+{
+  "images" : [
+    {
+      "filename" : "An_image_of_a_Socrates-like_AI_tutor_for_an_app_ic.jpg",
+      "idiom" : "universal",
+      "platform" : "ios",
+      "size" : "1024x1024"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

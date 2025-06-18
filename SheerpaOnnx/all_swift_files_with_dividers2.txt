@@ -1,0 +1,438 @@
+import SwiftUI
+import Combine
+
+struct ContentView: View {
+    @StateObject private var whisperState = WhisperState()
+    @StateObject private var openAIManager = OpenAIManager()
+    @StateObject private var elevenLabsManager = ElevenLabsManager()
+    @State private var cancellables = Set<AnyCancellable>()
+
+    var body: some View {
+        VStack {
+            ScrollView {
+                Text(whisperState.messageLog)
+                    .padding()
+                    .onChange(of: whisperState.messageLog) { _ in
+                        scrollToBottom()
+                    }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .onAppear {
+            whisperState.messageLog = "Welcome to the Tutor App, I will teach you how to count by tens. Can you count 1 2 3?"
+            speakText("Welcome to the Tutor App, I will teach you how to count by tens. Can you count 1 2 3?")
+
+            whisperState.$isRecording
+                .dropFirst()
+                .sink { isRecording in
+                    if !isRecording {
+                        if let text = whisperState.transcribedText {
+                            sendToOpenAI(text)
+                        }
+                    }
+                }
+                .store(in: &cancellables)
+        }
+    }
+
+    private func speakText(_ text: String) {
+        Task {
+            await elevenLabsManager.speakText(text)
+            await whisperState.startRecording()
+        }
+    }
+
+    private func sendToOpenAI(_ text: String) {
+        Task {
+            let response = await openAIManager.sendTextToOpenAI(text)
+            whisperState.messageLog += "\nAssistant: \(response)"
+            speakText(response)
+        }
+    }
+
+    private func scrollToBottom() {
+        // Implement scrolling to bottom logic here
+    }
+}
+
+@main
+struct WhisperApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+
+import SwiftUI
+
+//@main
+struct WhisperCppDemoApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+
+import Foundation
+
+func decodeWaveFile(_ url: URL) throws -> [Float] {
+    let data = try Data(contentsOf: url)
+    let floats = stride(from: 44, to: data.count, by: 2).map {
+        return data[$0..<$0 + 2].withUnsafeBytes {
+            let short = Int16(littleEndian: $0.load(as: Int16.self))
+            return max(-1.0, min(Float(short) / 32767.0, 1.0))
+        }
+    }
+    return floats
+}
+
+import Foundation
+
+class OpenAIManager: ObservableObject {
+    private let apiKey: String
+
+    init() {
+        guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "OpenAIAPIKey") as? String else {
+            fatalError("API key not found in Info.plist")
+        }
+        self.apiKey = apiKey
+    }
+
+    func sendTextToOpenAI(_ text: String) async -> String {
+        let prompt = """
+        You are Socrates, an AI TUTOR trying to teach a 2-7 year old how to count in tens such as 10, 20, 30, 40, 50 etc. Given the previous context of the conversation the child has said "\(text)". Give a prompt to the child back as to how to learn to count back in tens. Take many cycles to do the counting examples, before moving to more elaborate examples. In each response only do one activity following up on the previous activity. ONLY EVER GIVE ONE SINGLE RESPONSE, as you RESPONSE is directly being read out loud ot a kid.
+        """
+        
+        let requestData: [String: Any] = [
+            "model": "gpt-4",
+            "messages": [["role": "user", "content": prompt]],
+            "max_tokens": 150
+        ]
+
+        guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
+            return "Invalid URL"
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: requestData, options: [])
+        } catch {
+            return "Failed to encode request data: \(error.localizedDescription)"
+        }
+
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                return "Failed request with response: \(response)"
+            }
+            
+            guard let responseData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                  let choices = responseData["choices"] as? [[String: Any]],
+                  let message = choices.first?["message"] as? [String: Any],
+                  let content = message["content"] as? String else {
+                return "Failed to decode response data"
+            }
+            
+            return content
+        } catch {
+            return "Failed to make OpenAI request: \(error.localizedDescription)"
+        }
+    }
+}
+
+import Foundation
+import AVFoundation
+
+class ElevenLabsManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
+    @Published var isSpeaking = false
+    
+    private var audioPlayer: AVAudioPlayer?
+    private let xiApiKey: String
+    private let voiceId: String
+    
+    override init() {
+        guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "ElevenLabsAPIKey") as? String,
+              let voiceId = Bundle.main.object(forInfoDictionaryKey: "ElevenLabsVoiceID") as? String else {
+            fatalError("API Key or Voice ID not found in Info.plist")
+        }
+        self.xiApiKey = apiKey
+        self.voiceId = voiceId
+    }
+    
+    func speakText(_ text: String) async {
+        let url = URL(string: "https://api.elevenlabs.io/v1/text-to-speech/\(voiceId)")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(xiApiKey, forHTTPHeaderField: "xi-api-key")
+        
+        let body: [String: Any] = [
+            "text": text,
+            "model_id": "eleven_monolingual_v1",
+            "voice_settings": [
+                "stability": 0.5,
+                "similarity_boost": 0.5
+            ]
+        ]
+        
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        
+        let (data, response) = try! await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            print("Failed request with response: \(response)")
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.isSpeaking = true
+        }
+        
+        audioPlayer = try? AVAudioPlayer(data: data)
+        audioPlayer?.delegate = self
+        audioPlayer?.play()
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        DispatchQueue.main.async {
+            self.isSpeaking = false
+        }
+    }
+}
+
+import Foundation
+import SwiftUI
+import AVFoundation
+import Combine
+
+@MainActor
+class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
+    @Published var isModelLoaded = false
+    @Published var messageLog = ""
+    @Published var canTranscribe = false
+    @Published var isRecording = false
+    @Published var transcribedText: String?
+
+    private var whisperContext: WhisperContext?
+    private var audioRecorder: AVAudioRecorder?
+    private var audioPlayer: AVAudioPlayer?
+    private var conversationHistory: [String] = []
+    var openAIManager: OpenAIManager?
+    var elevenLabsManager: ElevenLabsManager?
+    private var recordedFile: URL?
+    private var sampleUrl: URL? {
+        Bundle.main.url(forResource: "jfk", withExtension: "wav", subdirectory: "samples")
+    }
+
+    private var modelUrl: URL? {
+        Bundle.main.url(forResource: "ggml-tiny.en", withExtension: "bin", subdirectory: "models")
+    }
+
+    override init() {
+        super.init()
+        do {
+            try loadModel()
+            canTranscribe = true
+        } catch {
+            print(error.localizedDescription)
+            DispatchQueue.main.async {
+                self.messageLog += "\(error.localizedDescription)\n"
+            }
+        }
+    }
+
+    private func loadModel() throws {
+        DispatchQueue.main.async {
+            self.messageLog += "Loading model...\n"
+        }
+        if let modelUrl {
+            whisperContext = try WhisperContext.createContext(path: modelUrl.path())
+            DispatchQueue.main.async {
+                self.messageLog += "Loaded model \(modelUrl.lastPathComponent)\n"
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.messageLog += "Could not locate model\n"
+            }
+        }
+    }
+
+    func transcribeSample() async {
+        if let sampleUrl {
+            await transcribeAudio(sampleUrl)
+        } else {
+            DispatchQueue.main.async {
+                self.messageLog += "Could not locate sample\n"
+            }
+        }
+    }
+
+    private func transcribeAudio(_ url: URL) async {
+        if (!canTranscribe) {
+            return
+        }
+        guard let whisperContext else {
+            return
+        }
+
+        do {
+            canTranscribe = false
+            DispatchQueue.main.async {
+                self.messageLog += "Reading wave samples...\n"
+            }
+            let data = try readAudioSamples(url)
+            DispatchQueue.main.async {
+                self.messageLog += "Transcribing data...\n"
+            }
+            await whisperContext.fullTranscribe(samples: data)
+            let text = await whisperContext.getTranscription()
+            DispatchQueue.main.async {
+                self.messageLog += "Done: \(text)\n"
+                self.transcribedText = text
+                self.conversationHistory.append("User: \(text)")
+            }
+        } catch {
+            print(error.localizedDescription)
+            DispatchQueue.main.async {
+                self.messageLog += "\(error.localizedDescription)\n"
+            }
+        }
+
+        canTranscribe = true
+    }
+
+    private func readAudioSamples(_ url: URL) throws -> [Float] {
+        stopPlayback()
+        try startPlayback(url)
+        return try decodeWaveFile(url)
+    }
+
+    func startRecording() async {
+        if isRecording {
+            await stopRecording()
+        } else {
+            requestRecordPermission { granted in
+                if granted {
+                    Task {
+                        do {
+                            try self.beginRecording()
+                        } catch {
+                            print(error.localizedDescription)
+                            DispatchQueue.main.async {
+                                self.messageLog += "\(error.localizedDescription)\n"
+                                self.isRecording = false
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private func beginRecording() throws {
+        stopPlayback()
+        let file = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            .appendingPathComponent("output.wav")
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatLinearPCM),
+            AVSampleRateKey: 44100,
+            AVNumberOfChannelsKey: 1,
+            AVLinearPCMBitDepthKey: 16,
+            AVLinearPCMIsFloatKey: false
+        ] as [String : Any]
+
+        audioRecorder = try AVAudioRecorder(url: file, settings: settings)
+        audioRecorder?.delegate = self
+        audioRecorder?.isMeteringEnabled = true
+        audioRecorder?.prepareToRecord()
+        audioRecorder?.record()
+        isRecording = true
+
+        // Update the audio level in real-time
+        Task {
+            while isRecording {
+                audioRecorder?.updateMeters()
+                await Task.sleep(200_000_000) // Update every 0.2 seconds
+            }
+        }
+
+        recordedFile = file
+    }
+
+    private func stopRecording() async {
+        audioRecorder?.stop()
+        isRecording = false
+        if let recordedFile {
+            await transcribeAudio(recordedFile)
+        }
+    }
+
+    private func requestRecordPermission(response: @escaping (Bool) -> Void) {
+#if os(macOS)
+        response(true)
+#else
+        AVAudioSession.sharedInstance().requestRecordPermission { granted in
+            response(granted)
+        }
+#endif
+    }
+
+    private func startPlayback(_ url: URL) throws {
+        audioPlayer = try AVAudioPlayer(contentsOf: url)
+        audioPlayer?.play()
+    }
+
+    private func stopPlayback() {
+        audioPlayer?.stop()
+        audioPlayer = nil
+    }
+
+    // MARK: AVAudioRecorderDelegate
+
+    nonisolated func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+        if let error {
+            Task {
+                await self.handleRecError(error)
+            }
+        }
+    }
+
+    private func handleRecError(_ error: Error) {
+        print(error.localizedDescription)
+        DispatchQueue.main.async {
+            self.messageLog += "\(error.localizedDescription)\n"
+            self.isRecording = false
+        }
+    }
+
+    nonisolated func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        Task {
+            await self.onDidFinishRecording()
+        }
+    }
+
+    private func onDidFinishRecording() {
+        isRecording = false
+    }
+
+    func sendTextToOpenAI(_ text: String) async {
+        guard let openAIManager else { return }
+        let response = await openAIManager.sendTextToOpenAI(text)
+        DispatchQueue.main.async {
+            self.messageLog += "\nAssistant: \(response)"
+            Task {
+                await self.elevenLabsManager?.speakText(response)
+                await self.startRecording()
+            }
+        }
+    }
+}
+

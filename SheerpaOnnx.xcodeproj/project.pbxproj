@@ -1,0 +1,466 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		280C7C502CF618EB004D2AD1 /* strathweb_phi_engine_framework.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63A340522C5C264200A36136 /* strathweb_phi_engine_framework.xcframework */; };
+		280C7C562CF61A55004D2AD1 /* whisper in Frameworks */ = {isa = PBXBuildFile; productRef = 280C7C552CF61A55004D2AD1 /* whisper */; };
+		280C7C592CF61A95004D2AD1 /* whisper in Frameworks */ = {isa = PBXBuildFile; productRef = 280C7C582CF61A95004D2AD1 /* whisper */; };
+		280C7C5A2CF61C3A004D2AD1 /* vits-coqui-en-ljspeech-neon in Resources */ = {isa = PBXBuildFile; fileRef = 63DA31522C387E5C001045DF /* vits-coqui-en-ljspeech-neon */; };
+		287CC9B72CE0E8FA00C45BF5 /* onnxruntime.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 287CC9B62CE0E8FA00C45BF5 /* onnxruntime.xcframework */; };
+		287CC9D02CE0ECC100C45BF5 /* ggml-base.en-q5_1.bin in Resources */ = {isa = PBXBuildFile; fileRef = 287CC9CF2CE0ECC100C45BF5 /* ggml-base.en-q5_1.bin */; };
+		287CC9E82CE20DB300C45BF5 /* sherpa-onnx.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 287CC9E72CE20DB300C45BF5 /* sherpa-onnx.xcframework */; };
+		6351F4CF2C2D6B980089FDBB /* RiffWaveUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632168DC2C2D5F3D00DA68CC /* RiffWaveUtils.swift */; };
+		6351F4D42C2D6BA60089FDBB /* ElevenLabsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632168E22C2D5F3D00DA68CC /* ElevenLabsManager.swift */; };
+		6351F4D62C2D6BB20089FDBB /* WhisperState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632168E52C2D5F3D00DA68CC /* WhisperState.swift */; };
+		6351F4D72C2D6BB40089FDBB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632168E62C2D5F3D00DA68CC /* Extension.swift */; };
+		6351F4DB2C2D705F0089FDBB /* WhisperCppDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6351F4DA2C2D705F0089FDBB /* WhisperCppDemoApp.swift */; };
+		6351F4DC2C2D72B40089FDBB /* SherpaOnnx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632168E42C2D5F3D00DA68CC /* SherpaOnnx.swift */; };
+		6351F4DD2C2D72E90089FDBB /* LibWhisper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6351F4C32C2D67260089FDBB /* LibWhisper.swift */; };
+		635B5BD42C581CCD00CD3DAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B5BD32C581CCD00CD3DAD /* ContentView.swift */; };
+		635B5BD62C581F6D00CD3DAD /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B5BD52C581F6D00CD3DAD /* Story.swift */; };
+		635B5BD82C5827FF00CD3DAD /* StoryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B5BD72C5827FF00CD3DAD /* StoryHelper.swift */; };
+		635F2B7C2C52E628002407E6 /* An_image_of_a_Socrates-like_AI_tutor_for_an_app_ic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6351F4BD2C2D665F0089FDBB /* An_image_of_a_Socrates-like_AI_tutor_for_an_app_ic.jpg */; };
+		635F2B7D2C52E91A002407E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6351F4C12C2D66830089FDBB /* Assets.xcassets */; };
+		63FB2CE52C596B7300F439DB /* strathweb_phi_engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FB2CE42C596B7300F439DB /* strathweb_phi_engine.swift */; };
+		63FB2CF02C597A3100F439DB /* Phi3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FB2CEF2C597A3100F439DB /* Phi3ViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		280C7C542CF61A1F004D2AD1 /* whisper.cpp */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = whisper.cpp; path = /Users/jj/code/whisper.cpp; sourceTree = "<absolute>"; };
+		287CC9B62CE0E8FA00C45BF5 /* onnxruntime.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = onnxruntime.xcframework; path = "../../../sherpa-onnx/build-ios-shared/ios-onnxruntime/1.17.1/onnxruntime.xcframework"; sourceTree = "<group>"; };
+		287CC9CF2CE0ECC100C45BF5 /* ggml-base.en-q5_1.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-base.en-q5_1.bin"; sourceTree = "<group>"; };
+		287CC9D72CE0EF8100C45BF5 /* SherpaOnnx-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SherpaOnnx-Bridging-Header.h"; sourceTree = "<group>"; };
+		287CC9E72CE20DB300C45BF5 /* sherpa-onnx.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "sherpa-onnx.xcframework"; path = "../../../sherpa-onnx/build-ios/sherpa-onnx.xcframework"; sourceTree = "<group>"; };
+		6312F0662C4EF32100AE00EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		632168D12C2D5F3D00DA68CC /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		632168D32C2D5F3D00DA68CC /* jfk.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = jfk.mp3; sourceTree = "<group>"; };
+		632168D42C2D5F3D00DA68CC /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		632168D52C2D5F3D00DA68CC /* jfk.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jfk.wav; sourceTree = "<group>"; };
+		632168DC2C2D5F3D00DA68CC /* RiffWaveUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiffWaveUtils.swift; sourceTree = "<group>"; };
+		632168DF2C2D5F3D00DA68CC /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		632168E12C2D5F3D00DA68CC /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		632168E22C2D5F3D00DA68CC /* ElevenLabsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevenLabsManager.swift; sourceTree = "<group>"; };
+		632168E42C2D5F3D00DA68CC /* SherpaOnnx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SherpaOnnx.swift; sourceTree = "<group>"; };
+		632168E52C2D5F3D00DA68CC /* WhisperState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhisperState.swift; sourceTree = "<group>"; };
+		632168E62C2D5F3D00DA68CC /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		632168EA2C2D5F3D00DA68CC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		632168EB2C2D5F3D00DA68CC /* WhisperCppDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhisperCppDemo.entitlements; sourceTree = "<group>"; };
+		6351F4BD2C2D665F0089FDBB /* An_image_of_a_Socrates-like_AI_tutor_for_an_app_ic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "An_image_of_a_Socrates-like_AI_tutor_for_an_app_ic.jpg"; sourceTree = "<group>"; };
+		6351F4C12C2D66830089FDBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6351F4C32C2D67260089FDBB /* LibWhisper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibWhisper.swift; sourceTree = "<group>"; };
+		6351F4C42C2D684B0089FDBB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../../whisper.cpp/examples/whisper.swiftui/README.md; sourceTree = "<group>"; };
+		6351F4DA2C2D705F0089FDBB /* WhisperCppDemoApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhisperCppDemoApp.swift; path = ../../../../whisper.cpp/examples/whisper.swiftui/whisper.swiftui.demo/WhisperCppDemoApp.swift; sourceTree = "<group>"; };
+		635B5BD32C581CCD00CD3DAD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		635B5BD52C581F6D00CD3DAD /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
+		635B5BD72C5827FF00CD3DAD /* StoryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryHelper.swift; sourceTree = "<group>"; };
+		63A340522C5C264200A36136 /* strathweb_phi_engine_framework.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = strathweb_phi_engine_framework.xcframework; path = "../../../strathweb-phi-engine/artifacts/swift/strathweb_phi_engine_framework.xcframework"; sourceTree = "<group>"; };
+		63DA31522C387E5C001045DF /* vits-coqui-en-ljspeech-neon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "vits-coqui-en-ljspeech-neon"; sourceTree = "<group>"; };
+		63DA31582C3889B6001045DF /* ggml-base.en-q5_1.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-base.en-q5_1.bin"; sourceTree = "<group>"; };
+		63FB2CE42C596B7300F439DB /* strathweb_phi_engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = strathweb_phi_engine.swift; path = "../../../../../strathweb-phi-engine/strathweb-phi-engine/bindings/strathweb_phi_engine.swift"; sourceTree = "<group>"; };
+		63FB2CEF2C597A3100F439DB /* Phi3ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phi3ViewModel.swift; sourceTree = "<group>"; };
+		C924F32A29DDAC0B00A440A5 /* SheerpaOnnx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheerpaOnnx.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C924F32729DDAC0B00A440A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				287CC9E82CE20DB300C45BF5 /* sherpa-onnx.xcframework in Frameworks */,
+				280C7C562CF61A55004D2AD1 /* whisper in Frameworks */,
+				280C7C592CF61A95004D2AD1 /* whisper in Frameworks */,
+				280C7C502CF618EB004D2AD1 /* strathweb_phi_engine_framework.xcframework in Frameworks */,
+				287CC9B72CE0E8FA00C45BF5 /* onnxruntime.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		632168C72C2D5F3D00DA68CC /* SheerpaOnnx */ = {
+			isa = PBXGroup;
+			children = (
+				6351F4DA2C2D705F0089FDBB /* WhisperCppDemoApp.swift */,
+				632168CE2C2D5F3D00DA68CC /* Resources */,
+				632168DB2C2D5F3D00DA68CC /* Utils */,
+				632168DD2C2D5F3D00DA68CC /* Models */,
+				632168E62C2D5F3D00DA68CC /* Extension.swift */,
+				632168E82C2D5F3D00DA68CC /* Supporting files */,
+				632168C82C2D5F3D00DA68CC /* UI */,
+			);
+			path = SheerpaOnnx;
+			sourceTree = "<group>";
+		};
+		632168C82C2D5F3D00DA68CC /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				635B5BD32C581CCD00CD3DAD /* ContentView.swift */,
+				635B5BD52C581F6D00CD3DAD /* Story.swift */,
+				635B5BD72C5827FF00CD3DAD /* StoryHelper.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		632168CE2C2D5F3D00DA68CC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				632168CF2C2D5F3D00DA68CC /* models */,
+				632168D22C2D5F3D00DA68CC /* samples */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		632168CF2C2D5F3D00DA68CC /* models */ = {
+			isa = PBXGroup;
+			children = (
+				632168D12C2D5F3D00DA68CC /* .gitignore */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		632168D22C2D5F3D00DA68CC /* samples */ = {
+			isa = PBXGroup;
+			children = (
+				632168D32C2D5F3D00DA68CC /* jfk.mp3 */,
+				632168D42C2D5F3D00DA68CC /* .gitignore */,
+				632168D52C2D5F3D00DA68CC /* jfk.wav */,
+			);
+			path = samples;
+			sourceTree = "<group>";
+		};
+		632168DB2C2D5F3D00DA68CC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				632168DC2C2D5F3D00DA68CC /* RiffWaveUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		632168DD2C2D5F3D00DA68CC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				632168DF2C2D5F3D00DA68CC /* Model.swift */,
+				63FB2CE42C596B7300F439DB /* strathweb_phi_engine.swift */,
+				287CC9D72CE0EF8100C45BF5 /* SherpaOnnx-Bridging-Header.h */,
+				632168E12C2D5F3D00DA68CC /* Extension.swift */,
+				632168E42C2D5F3D00DA68CC /* SherpaOnnx.swift */,
+				632168E52C2D5F3D00DA68CC /* WhisperState.swift */,
+				632168E22C2D5F3D00DA68CC /* ElevenLabsManager.swift */,
+				63FB2CEF2C597A3100F439DB /* Phi3ViewModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		632168E82C2D5F3D00DA68CC /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				632168E92C2D5F3D00DA68CC /* Preview Content */,
+				632168EB2C2D5F3D00DA68CC /* WhisperCppDemo.entitlements */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		632168E92C2D5F3D00DA68CC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				632168EA2C2D5F3D00DA68CC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6351F4C22C2D67260089FDBB /* whisper.cpp.swift */ = {
+			isa = PBXGroup;
+			children = (
+				6351F4C32C2D67260089FDBB /* LibWhisper.swift */,
+			);
+			path = whisper.cpp.swift;
+			sourceTree = "<group>";
+		};
+		C924F32129DDAC0B00A440A5 = {
+			isa = PBXGroup;
+			children = (
+				6312F0662C4EF32100AE00EE /* Info.plist */,
+				287CC9CF2CE0ECC100C45BF5 /* ggml-base.en-q5_1.bin */,
+				280C7C542CF61A1F004D2AD1 /* whisper.cpp */,
+				63DA31582C3889B6001045DF /* ggml-base.en-q5_1.bin */,
+				63DA31522C387E5C001045DF /* vits-coqui-en-ljspeech-neon */,
+				6351F4C42C2D684B0089FDBB /* README.md */,
+				6351F4C12C2D66830089FDBB /* Assets.xcassets */,
+				6351F4BD2C2D665F0089FDBB /* An_image_of_a_Socrates-like_AI_tutor_for_an_app_ic.jpg */,
+				6351F4C22C2D67260089FDBB /* whisper.cpp.swift */,
+				632168C72C2D5F3D00DA68CC /* SheerpaOnnx */,
+				C924F32B29DDAC0B00A440A5 /* Products */,
+				C924F35A29DDAE3F00A440A5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		C924F32B29DDAC0B00A440A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C924F32A29DDAC0B00A440A5 /* SheerpaOnnx.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C924F35A29DDAE3F00A440A5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				287CC9E72CE20DB300C45BF5 /* sherpa-onnx.xcframework */,
+				287CC9B62CE0E8FA00C45BF5 /* onnxruntime.xcframework */,
+				63A340522C5C264200A36136 /* strathweb_phi_engine_framework.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C924F32929DDAC0B00A440A5 /* SheerpaOnnx */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C924F34E29DDAC0D00A440A5 /* Build configuration list for PBXNativeTarget "SheerpaOnnx" */;
+			buildPhases = (
+				C924F32629DDAC0B00A440A5 /* Sources */,
+				C924F32729DDAC0B00A440A5 /* Frameworks */,
+				635F2B782C52E20A002407E6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SheerpaOnnx;
+			packageProductDependencies = (
+				280C7C552CF61A55004D2AD1 /* whisper */,
+				280C7C582CF61A95004D2AD1 /* whisper */,
+			);
+			productName = SherpaOnnx;
+			productReference = C924F32A29DDAC0B00A440A5 /* SheerpaOnnx.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C924F32229DDAC0B00A440A5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				KnownAssetTags = (
+					ModelResource,
+				);
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1610;
+				TargetAttributes = {
+					C924F32929DDAC0B00A440A5 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = C924F32529DDAC0B00A440A5 /* Build configuration list for PBXProject "SheerpaOnnx" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C924F32129DDAC0B00A440A5;
+			packageReferences = (
+				280C7C572CF61A95004D2AD1 /* XCLocalSwiftPackageReference "../../../whisper.cpp" */,
+			);
+			productRefGroup = C924F32B29DDAC0B00A440A5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C924F32929DDAC0B00A440A5 /* SheerpaOnnx */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		635F2B782C52E20A002407E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				287CC9D02CE0ECC100C45BF5 /* ggml-base.en-q5_1.bin in Resources */,
+				280C7C5A2CF61C3A004D2AD1 /* vits-coqui-en-ljspeech-neon in Resources */,
+				635F2B7C2C52E628002407E6 /* An_image_of_a_Socrates-like_AI_tutor_for_an_app_ic.jpg in Resources */,
+				635F2B7D2C52E91A002407E6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C924F32629DDAC0B00A440A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6351F4D72C2D6BB40089FDBB /* Extension.swift in Sources */,
+				6351F4DD2C2D72E90089FDBB /* LibWhisper.swift in Sources */,
+				63FB2CE52C596B7300F439DB /* strathweb_phi_engine.swift in Sources */,
+				6351F4D62C2D6BB20089FDBB /* WhisperState.swift in Sources */,
+				6351F4DC2C2D72B40089FDBB /* SherpaOnnx.swift in Sources */,
+				6351F4CF2C2D6B980089FDBB /* RiffWaveUtils.swift in Sources */,
+				63FB2CF02C597A3100F439DB /* Phi3ViewModel.swift in Sources */,
+				635B5BD42C581CCD00CD3DAD /* ContentView.swift in Sources */,
+				6351F4DB2C2D705F0089FDBB /* WhisperCppDemoApp.swift in Sources */,
+				635B5BD82C5827FF00CD3DAD /* StoryHelper.swift in Sources */,
+				6351F4D42C2D6BA60089FDBB /* ElevenLabsManager.swift in Sources */,
+				635B5BD62C581F6D00CD3DAD /* Story.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C924F34D29DDAC0D00A440A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				"INFOPLIST_FILE[sdk=*]" = Info.plist;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C924F35029DDAC0D00A440A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
+				CURRENT_PROJECT_VERSION = 1.95;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 8SFB89GQU2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/../../build-ios/sherpa-onnx.xcframework/Headers/";
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SherpaOnnx;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone access for Next-gen Kaldi to work";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LINK_WITH_STANDARD_LIBRARIES = YES;
+				MARKETING_VERSION = 0.8;
+				OTHER_LDFLAGS = "-lc++";
+				PRODUCT_BUNDLE_IDENTIFIER = com.socrates.tutor.demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRINGS_FILE_INFOPLIST_RENAME = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/../../swift-api-examples/SherpaOnnx-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C924F32529DDAC0B00A440A5 /* Build configuration list for PBXProject "SheerpaOnnx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C924F34D29DDAC0D00A440A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C924F34E29DDAC0D00A440A5 /* Build configuration list for PBXNativeTarget "SheerpaOnnx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C924F35029DDAC0D00A440A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		280C7C572CF61A95004D2AD1 /* XCLocalSwiftPackageReference "../../../whisper.cpp" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../whisper.cpp;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		280C7C552CF61A55004D2AD1 /* whisper */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = whisper;
+		};
+		280C7C582CF61A95004D2AD1 /* whisper */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = whisper;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = C924F32229DDAC0B00A440A5 /* Project object */;
+}
