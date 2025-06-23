@@ -78,9 +78,9 @@ This app integrates the following open source repositories:
 
 ## TODO
 
-- Switch to Phi-4 in strathweb for improved story generation and conversational AI.
-- Use whisper.cpp for Voice Activity Detection (VAD) to improve audio segmentation and responsiveness.
-- Add voice cloning through coqui so kid stories can be narrated in the kid's own voice.
+- ❌ Switch to Phi-4 in strathweb for improved story generation and conversational AI.
+- ❌ Use whisper.cpp for Voice Activity Detection (VAD) to improve audio segmentation and responsiveness.
+- ❌ Add voice cloning through coqui so kid stories can be narrated in the kid's own voice.
 
 ## Credits
 
