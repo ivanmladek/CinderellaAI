@@ -76,6 +76,12 @@ This app integrates the following open source repositories:
 - **SherpaOnnx-Bridging-Header.h**  
   Objective-C bridging header to expose C/C++ APIs (such as Sherpa ONNX) to Swift code.
 
+## TODO
+
+- Switch to Phi-4 in strathweb for improved story generation and conversational AI.
+- Use whisper.cpp for Voice Activity Detection (VAD) to improve audio segmentation and responsiveness.
+- Add voice cloning through coqui so kid stories can be narrated in the kid's own voice.
+
 ## Credits
 
 This app would not be possible without the amazing work of the open source community:
