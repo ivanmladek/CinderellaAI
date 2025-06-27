@@ -85,33 +85,15 @@ class Phi3ViewModel: NSObject, ObservableObject, URLSessionDownloadDelegate {
             self.isLoadingEngine = true
         }
         
-        // First try to find a local model file
+        let model_repo = "unsloth/Phi-4-mini-instruct-GGUF"
         let model_filename = "Phi-4-mini-instruct-Q4_K_M.gguf"
-        
-        // Check if model exists locally in app bundle
-        var modelProvider: PhiModelProvider
-        if let bundlePath = Bundle.main.path(forResource: "Phi-4-mini-instruct-Q4_K_M", ofType: "gguf") {
-            modelProvider = PhiModelProvider.local(path: bundlePath)
-        } else {
-            // Check in Documents directory
-            let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            let localModelPath = documentsPath.appendingPathComponent(model_filename).path
-            
-            if FileManager.default.fileExists(atPath: localModelPath) {
-                modelProvider = PhiModelProvider.local(path: localModelPath)
-            } else {
-                // Use HuggingFace with full URL
-                let model_repo = "unsloth/Phi-4-mini-instruct-GGUF"
-                let modelRevision = "main"
-                modelProvider = PhiModelProvider.huggingFace(
-                    modelRepo: model_repo,
-                    modelFileName: model_filename,
-                    modelRevision: modelRevision
-                )
-            }
-        }
-        
-        let directoryName = "models--unsloth--Phi-4-mini-instruct-GGUF/blobs/"
+        let modelRevision = "main"
+        let directoryName = "models--" + model_repo.replacingOccurrences(of: "/", with: "--") + "/blobs/"
+        let modelProvider = PhiModelProvider.huggingFace(
+            modelRepo: model_repo,
+            modelFileName: model_filename,
+            modelRevision: modelRevision
+        )
         
         let engineBuilder = PhiEngineBuilder()
         try! engineBuilder.withModelProvider(modelProvider: modelProvider)
