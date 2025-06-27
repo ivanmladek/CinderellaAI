@@ -85,8 +85,8 @@ class Phi3ViewModel: NSObject, ObservableObject, URLSessionDownloadDelegate {
             self.isLoadingEngine = true
         }
         
-        let model_repo = "unsloth/phi-4-mini-4k-instruct-gguf"
-        let model_filename = "phi-4-mini-4k-instruct-Q4_K_M.gguf"
+        let model_repo = "unsloth/Phi-4-mini-instruct-GGUF"
+        let model_filename = "Phi-4-mini-instruct-Q4_K_M.gguf"
         let modelRevision = "main"
         let directoryName = "models--" + model_repo.replacingOccurrences(of: "/", with: "--") + "/blobs/"
         let modelProvider = PhiModelProvider.huggingFace(
