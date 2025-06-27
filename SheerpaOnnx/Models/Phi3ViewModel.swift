@@ -100,8 +100,10 @@ class Phi3ViewModel: NSObject, ObservableObject, URLSessionDownloadDelegate {
         try! engineBuilder.tryUseGpu()
         try! engineBuilder.withEventHandler(eventHandler: BoxedPhiEventHandler(handler: ModelEventsHandler(parent: self)))
         
-        let modelDirectory = FileManager.default.temporaryDirectory.path + "/" + directoryName
-        
+        let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        let modelDirectoryURL = cachesDirectory.appendingPathComponent(directoryName)
+        try? FileManager.default.createDirectory(at: modelDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+
         let systemInstruction2 = 
         """
         Write a classic fairytale in three acts:
@@ -114,7 +116,7 @@ class Phi3ViewModel: NSObject, ObservableObject, URLSessionDownloadDelegate {
         """
         
         self.engine = try! engineBuilder.buildStateful(
-            cacheDir: modelDirectory,
+            cacheDir: modelDirectoryURL.path,
             systemInstruction: systemInstruction2
         )
         
