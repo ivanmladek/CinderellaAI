@@ -85,8 +85,8 @@ class Phi3ViewModel: NSObject, ObservableObject, URLSessionDownloadDelegate {
             self.isLoadingEngine = true
         }
         
-        let model_repo = "bartowski/Phi-3-mini-4k-instruct-v0.3-GGUF"
-        let model_filename = "Phi-3-mini-4k-instruct-v0.3-Q3_K_L.gguf"
+        let model_repo = "unsloth/Phi-4-mini-instruct-GGUF"
+        let model_filename = "Phi-4-mini-instruct-Q4_K_M.gguf"
         let modelRevision = "main"
         let directoryName = "models--" + model_repo.replacingOccurrences(of: "/", with: "--") + "/blobs/"
         let modelProvider = PhiModelProvider.huggingFace(
@@ -100,8 +100,10 @@ class Phi3ViewModel: NSObject, ObservableObject, URLSessionDownloadDelegate {
         try! engineBuilder.tryUseGpu()
         try! engineBuilder.withEventHandler(eventHandler: BoxedPhiEventHandler(handler: ModelEventsHandler(parent: self)))
         
-        let modelDirectory = FileManager.default.temporaryDirectory.path + "/" + directoryName
-        
+        let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        let modelDirectoryURL = cachesDirectory.appendingPathComponent(directoryName)
+        try? FileManager.default.createDirectory(at: modelDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+
         let systemInstruction2 = 
         """
         Write a classic fairytale in three acts:
@@ -114,7 +116,7 @@ class Phi3ViewModel: NSObject, ObservableObject, URLSessionDownloadDelegate {
         """
         
         self.engine = try! engineBuilder.buildStateful(
-            cacheDir: modelDirectory,
+            cacheDir: modelDirectoryURL.path,
             systemInstruction: systemInstruction2
         )
         
@@ -192,6 +194,6 @@ class Phi3ViewModel: NSObject, ObservableObject, URLSessionDownloadDelegate {
             return tokens.prefix(maxTokens).joined(separator: " ")
         } else {
             return text
-        }
+        } 
     }
 }
