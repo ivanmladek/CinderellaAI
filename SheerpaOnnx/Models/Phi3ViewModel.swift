@@ -85,8 +85,8 @@ class Phi3ViewModel: NSObject, ObservableObject, URLSessionDownloadDelegate {
             self.isLoadingEngine = true
         }
         
-        let model_repo = "bartowski/Phi-3-mini-4k-instruct-v0.3-GGUF"
-        let model_filename = "Phi-3-mini-4k-instruct-v0.3-Q3_K_L.gguf"
+        let model_repo = "unsloth/phi-4-mini-4k-instruct-gguf"
+        let model_filename = "phi-4-mini-4k-instruct-Q4_K_M.gguf"
         let modelRevision = "main"
         let directoryName = "models--" + model_repo.replacingOccurrences(of: "/", with: "--") + "/blobs/"
         let modelProvider = PhiModelProvider.huggingFace(
@@ -192,6 +192,6 @@ class Phi3ViewModel: NSObject, ObservableObject, URLSessionDownloadDelegate {
             return tokens.prefix(maxTokens).joined(separator: " ")
         } else {
             return text
-        }
+        } 
     }
 }
